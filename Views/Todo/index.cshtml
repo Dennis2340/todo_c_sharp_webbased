@@ -1,0 +1,50 @@
+@model List<TodoApp.Models.Todo>
+
+<style>
+    h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    input[type="checkbox"] {
+        margin-right: 10px;
+    }
+
+    a {
+        text-decoration: none;
+        color: #007bff;
+        margin-left: 10px;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    .add-todo {
+        margin-top: 20px;
+    }
+</style>
+
+<h2>Todo List</h2>
+<ul>
+    @foreach (var todo in Model)
+    {
+        <li>
+            <input type="checkbox" @(todo.IsDone ? "checked" : "") disabled />
+            <span>@todo.Title</span>
+            <a href="@Url.Action("Delete", "Todo", new { id = todo.Id })">Delete</a>
+        </li>
+    }
+</ul>
+<a href="@Url.Action("Create", "Todo")" class="add-todo">Add New Todo</a>
